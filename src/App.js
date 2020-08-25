@@ -1,24 +1,22 @@
 import React from 'react';
-import logo from './logo.svg';
+import streamMock from '../src/mocks/streams.json';
 import './App.css';
 
+import { saveAs } from 'file-saver';
+import GPXToolkit from 'gpx-toolkit';
+
 function App() {
+  const config = {
+    date: new Date(),
+    title: 'test stream'
+  };
+  const gpx = GPXToolkit.streamToGPX(streamMock, config);
+  var blob = new Blob([gpx], { type: "text/plain;charset=utf-8" });
+  saveAs(blob, `${new Date().toISOString()}.gpx`);
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <h1>{`Work in progress`}</h1>
+      <span>{`Pablo Albaladejo Mestre - GPX Toolkit`}</span>
     </div>
   );
 }
